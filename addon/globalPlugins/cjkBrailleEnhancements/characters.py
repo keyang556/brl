@@ -44,7 +44,13 @@ _OTHER_CJK_RANGES: tuple[tuple[int, int], ...] = (
 
 def _buildLookup(*rangeGroups: Sequence[tuple[int, int]]) -> tuple[list[int], list[int]]:
 	ranges = sorted(r for group in rangeGroups for r in group)
-	return [start for start, _end in ranges], [end for _start, end in ranges]
+	merged: list[tuple[int, int]] = []
+	for start, end in ranges:
+		if merged and start <= merged[-1][1] + 1:
+			merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+		else:
+			merged.append((start, end))
+	return [start for start, _end in merged], [end for _start, end in merged]
 
 
 def _inRanges(char: str, lookup: tuple[list[int], list[int]]) -> bool:
