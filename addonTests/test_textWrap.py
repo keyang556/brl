@@ -8,7 +8,6 @@
 import unittest
 
 import braille
-import braille.buffers
 import braille.display
 import braille.extensions
 import brailleTables
@@ -74,7 +73,7 @@ class _TextWrapTestCase(unittest.TestCase):
 
 	def isCharacterBoundary(self, braillePos: int) -> bool:
 		return braillePos in (0, len(self.buffer.brailleCells)) or self.rawPos(braillePos - 1) != self.rawPos(
-			braillePos
+			braillePos,
 		)
 
 	def isBreak(self, braillePos: int) -> bool:
@@ -117,7 +116,8 @@ class TestInstall(_TextWrapTestCase):
 		self.assertIs(BrailleBuffer.__dict__["windowEndPos"], windowEndPos)
 		self.assertIsNot(BrailleBuffer._nextWindow, textWrap._nextWindow)
 		self.assertIsNot(
-			BrailleBuffer._calculateWindowRowBufferOffsets, textWrap._calculateWindowRowBufferOffsets
+			BrailleBuffer._calculateWindowRowBufferOffsets,
+			textWrap._calculateWindowRowBufferOffsets,
 		)
 		self.assertTrue(textWrap.install())
 		self.assertIs(BrailleBuffer._nextWindow, textWrap._nextWindow)
@@ -190,7 +190,8 @@ class TestCharacterBoundaries(_TextWrapTestCase):
 			self.assertEqual(previous.end, row.start)
 		for row in rows:
 			self.assertTrue(
-				self.isBreak(row.end), msg=(row, self.buffer.brailleCells[row.end - 1 : row.end + 1])
+				self.isBreak(row.end),
+				msg=(row, self.buffer.brailleCells[row.end - 1 : row.end + 1]),
 			)
 			self.assertLessEqual(row.end - row.start, _numCols)
 

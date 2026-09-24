@@ -12,8 +12,16 @@ import wx
 from gui import guiHelper, nvdaControls
 from gui.settingsDialogs import SettingsPanel
 
-from . import addonConfig
-from .addonConfig import CJKTextWrap, SpacingBoundary
+from .addonConfig import (
+	CJKTextWrap,
+	SpacingBoundary,
+	getTextWrap,
+	isSpacingBoundaryEnabled,
+	isSpacingEnabled,
+	setSpacingBoundary,
+	setSpacingEnabled,
+	setTextWrap,
+)
 
 addonHandler.initTranslation()
 
@@ -33,7 +41,7 @@ class CJKBrailleSettingsPanel(SettingsPanel):
 			wx.Choice,
 			choices=[mode.displayString for mode in CJKTextWrap],
 		)
-		self.textWrapList.SetSelection(list(CJKTextWrap).index(addonConfig.getTextWrap()))
+		self.textWrapList.SetSelection(list(CJKTextWrap).index(getTextWrap()))
 
 		self.insertSpacesCheckBox: wx.CheckBox = sHelper.addItem(
 			wx.CheckBox(
@@ -42,7 +50,7 @@ class CJKBrailleSettingsPanel(SettingsPanel):
 				label=_("&Insert spaces between Chinese characters, Latin letters and numbers"),
 			),
 		)
-		self.insertSpacesCheckBox.SetValue(addonConfig.isSpacingEnabled())
+		self.insertSpacesCheckBox.SetValue(isSpacingEnabled())
 		self.insertSpacesCheckBox.Bind(wx.EVT_CHECKBOX, self._onInsertSpacesChange)
 
 		self._boundaries = list(SpacingBoundary)
@@ -54,9 +62,7 @@ class CJKBrailleSettingsPanel(SettingsPanel):
 			choices=[boundary.displayString for boundary in self._boundaries],
 		)
 		self.boundariesList.CheckedItems = [
-			index
-			for index, boundary in enumerate(self._boundaries)
-			if addonConfig.isSpacingBoundaryEnabled(boundary)
+			index for index, boundary in enumerate(self._boundaries) if isSpacingBoundaryEnabled(boundary)
 		]
 		self.boundariesList.SetSelection(0)
 		self.boundariesList.Enable(self.insertSpacesCheckBox.IsChecked())
@@ -66,8 +72,8 @@ class CJKBrailleSettingsPanel(SettingsPanel):
 
 	@override
 	def onSave(self) -> None:
-		addonConfig.setTextWrap(list(CJKTextWrap)[self.textWrapList.GetSelection()])
-		addonConfig.setSpacingEnabled(self.insertSpacesCheckBox.IsChecked())
+		setTextWrap(list(CJKTextWrap)[self.textWrapList.GetSelection()])
+		setSpacingEnabled(self.insertSpacesCheckBox.IsChecked())
 		checkedItems = set(self.boundariesList.CheckedItems)
 		for index, boundary in enumerate(self._boundaries):
-			addonConfig.setSpacingBoundary(boundary, index in checkedItems)
+			setSpacingBoundary(boundary, index in checkedItems)

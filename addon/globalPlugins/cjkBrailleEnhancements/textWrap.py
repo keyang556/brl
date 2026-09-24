@@ -35,8 +35,7 @@ from braille.formatting import getParagraphStartMarker
 from config.featureFlagEnums import BrailleTextWrapFlag
 from logHandler import log
 
-from . import addonConfig
-from .addonConfig import CJKTextWrap
+from .addonConfig import CJKTextWrap, getTextWrap
 from .characters import isContinuousScript
 
 _WORD_WRAP_MODES = (
@@ -209,7 +208,7 @@ def _calculateRow(
 
 def _calculateWindowRowBufferOffsets(self: BrailleBuffer, pos: int) -> None:
 	"""Replacement for :meth:`BrailleBuffer._calculateWindowRowBufferOffsets`."""
-	mode = addonConfig.getTextWrap()
+	mode = getTextWrap()
 	setattr(self, _NEXT_WINDOW_START_ATTR, None)
 	if mode == CJKTextWrap.FOLLOW_NVDA or not self.brailleCells:
 		_callOriginalCalculate(self, pos)
@@ -275,7 +274,7 @@ def _set_windowEndPos(self: BrailleBuffer, endPos: int) -> None:
 	This follows NVDA's implementation,
 	except for the way the window start is chosen to avoid splitting words or CJK characters.
 	"""
-	mode = addonConfig.getTextWrap()
+	mode = getTextWrap()
 	originalSetter = cast(Callable[[BrailleBuffer, int], None], cast(property, _originalWindowEndPos).fset)
 	if mode == CJKTextWrap.FOLLOW_NVDA:
 		originalSetter(self, endPos)

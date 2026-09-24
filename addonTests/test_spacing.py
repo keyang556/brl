@@ -60,7 +60,8 @@ class TestConverter(unittest.TestCase):
 		self.assertEqual(converter.encoded, "使用 NVDA 閱讀")
 		self.assertEqual(converter.insertedCount, 2)
 		self.assertEqual(
-			[converter.strToEncodedOffsets(i) for i in range(len(text))], [0, 1, 3, 4, 5, 6, 8, 9]
+			[converter.strToEncodedOffsets(i) for i in range(len(text))],
+			[0, 1, 3, 4, 5, 6, 8, 9],
 		)
 		# Separators map to the character that follows them.
 		self.assertEqual(

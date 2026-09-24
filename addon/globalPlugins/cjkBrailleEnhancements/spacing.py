@@ -20,7 +20,7 @@ import louisHelper
 from logHandler import log
 from textUtils import OffsetConverter
 
-from . import addonConfig
+from .addonConfig import SpacingBoundary, getSpacingBoundaries
 from .characters import CharacterType, getCharacterType
 
 _CHINESE_LANGUAGES: frozenset[str] = frozenset(
@@ -127,7 +127,7 @@ class BoundarySpacingOffsetConverter(OffsetConverter):
 
 
 def getBoundaryTypes(
-	boundaries: Collection[addonConfig.SpacingBoundary],
+	boundaries: Collection[SpacingBoundary],
 ) -> frozenset[frozenset[CharacterType]]:
 	return frozenset(boundary.characterTypes for boundary in boundaries)
 
@@ -165,7 +165,7 @@ def _translate(
 	originalTranslate = cast(Callable[..., _TranslateResult], _originalTranslate)
 	converter: BoundarySpacingOffsetConverter | None = None
 	try:
-		boundaries = addonConfig.getSpacingBoundaries() if _active else frozenset()
+		boundaries = getSpacingBoundaries() if _active else frozenset()
 		if boundaries and tableList and "\0" not in inbuf and isChineseTable(tableList[0]):
 			converter = BoundarySpacingOffsetConverter(inbuf, getBoundaryTypes(boundaries))
 			if not converter.insertedCount:
@@ -218,5 +218,5 @@ def uninstall() -> None:
 		# Another component wrapped louisHelper.translate after us.
 		# Keep our function in the chain, it passes everything through while inactive.
 		log.debugWarning(
-			"louisHelper.translate was wrapped by another component, leaving pass-through in place"
+			"louisHelper.translate was wrapped by another component, leaving pass-through in place",
 		)

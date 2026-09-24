@@ -33,6 +33,17 @@ jobs:
         sudo apt-get install -y gettext
         uv sync
 
+    - name: Get NVDA source and wxPython for type checking
+      # pyright resolves NVDA modules from ../nvda (see extraPaths in pyproject.toml).
+      # Use the NVDA version the add-on is tested with, and the wxPython version NVDA uses.
+      env:
+        NVDA_REF: release-2026.3beta2
+        WXPYTHON_WHEEL: https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-24.04/wxpython-4.2.4-cp313-cp313-linux_x86_64.whl
+      run: |
+        git clone --quiet --depth 1 --filter=blob:none --sparse --branch "$NVDA_REF" https://github.com/nvaccess/nvda.git ../nvda
+        git -C ../nvda sparse-checkout set source tests/unit
+        uv pip install --no-deps "$WXPYTHON_WHEEL"
+
     - name: Code checks
       run: export PREK_SKIP=no-commit-to-branch; uv run prek run --all-files
 
