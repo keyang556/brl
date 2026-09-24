@@ -1,1 +1,3 @@
-Use this file to explain what has changed in your add-on since the previous release. This will be included automatically in the release description when used with GitHub actions.
+* Initial release.
+* Text wrap for CJK characters: off, at character boundaries, or repeating split characters (GMouse style) (NVDA issue #18295).
+* Optional spaces between Chinese characters, Latin letters and numbers in Chinese braille (NVDA issue #20726).

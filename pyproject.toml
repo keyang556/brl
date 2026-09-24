@@ -3,9 +3,9 @@ requires = ["setuptools~=80.9", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "addonTemplate"
+name = "cjkBrailleEnhancements"
 dynamic = ["version"]
-description = "NVDA add-on template"
+description = "CJK Braille Enhancements add-on for NVDA"
 maintainers = [
 	{name = "NV Access", email = "info@nvaccess.org"},
 ]
@@ -55,6 +55,11 @@ dev = [
 	{ include-group = "l10n" },
 	{ include-group = "lint" },
 ]
+
+[tool.setuptools]
+# The add-on is not installed as a Python package,
+# so don't let setuptools discover top-level directories such as addonTests as packages.
+packages = []
 
 [tool.ruff]
 line-length = 110
@@ -126,7 +131,11 @@ exclude = [
 # Tell pyright where to load python code from
 extraPaths = [
 	"./addon",
+	# Global plugin packages, imported by name in addonTests.
+	"./addon/globalPlugins",
 	"../nvda/source",
+	# NVDA's unit test package (tests.unit), which bootstraps addonTests.
+	"../nvda",
 ]
 
 # General config
@@ -141,7 +150,6 @@ strictSetInference = true
 
 # Compliant rules
 reportAbstractUsage = true
-reportArgumentType = true
 reportAssertAlwaysTrue = true
 reportAssertTypeFailure = true
 reportAssignmentType = true
@@ -152,15 +160,12 @@ reportConstantRedefinition = true
 reportDuplicateImport = true
 reportFunctionMemberAccess = true
 reportGeneralTypeIssues = true
-reportImplicitOverride = true
 reportImplicitStringConcatenation = true
 reportImportCycles = true
-reportIncompatibleMethodOverride = true
 reportIncompatibleVariableOverride = true
 reportIncompleteStub = true
 reportInconsistentConstructor = true
 reportInconsistentOverload = true
-reportIndexIssue = true
 reportInvalidStringEscapeSequence = true
 reportInvalidStubStatement = true
 reportInvalidTypeArguments = true
@@ -169,21 +174,17 @@ reportInvalidTypeVarUse = true
 reportMatchNotExhaustive = true
 reportMissingImports = true
 reportMissingModuleSource = true
-reportMissingParameterType = true
 reportMissingSuperCall = true
 reportMissingTypeArgument = true
 reportNoOverloadImplementation = true
 reportOperatorIssue = true
-reportOptionalCall = true
 reportOptionalContextManager = true
 reportOptionalIterable = true
-reportOptionalMemberAccess = true
 reportOptionalOperand = true
 reportOptionalSubscript = true
 reportOverlappingOverload = true
 reportPossiblyUnboundVariable = true
 reportPrivateImportUsage = true
-reportPrivateUsage = true
 reportPropertyTypeMismatch = true
 reportRedeclaration = true
 reportReturnType = true
@@ -193,12 +194,7 @@ reportTypedDictNotRequiredAccess = true
 reportUnboundVariable = true
 reportUndefinedVariable = true
 reportUnhashable = true
-reportUninitializedInstanceVariable = true
-reportUnknownArgumentType = true
 reportUnknownLambdaType = true
-reportUnknownMemberType = true
-reportUnknownParameterType = true
-reportUnknownVariableType = true
 reportUnnecessaryCast = true
 reportUnnecessaryComparison = true
 reportUnnecessaryContains = true
@@ -209,13 +205,11 @@ reportUntypedBaseClass = true
 reportUntypedClassDecorator = true
 reportUntypedFunctionDecorator = true
 reportUntypedNamedTuple = true
-reportUnusedCallResult = true
 reportUnusedClass = true
 reportUnusedCoroutine = true
 reportUnusedExcept = true
 reportUnusedExpression = true
 reportUnusedFunction = true
-reportUnusedImport = true
 reportUnusedVariable = true
 reportWildcardImportFromLibrary = true
 
@@ -226,3 +220,21 @@ reportMissingTypeStubs = false
 
 # Bad rules
 # These are sorted alphabetically and should be enabled and moved to compliant rules section when resolved.
+# NVDA disables these rules for its own code too (see the [tool.pyright] section of NVDA's pyproject.toml),
+# as NVDA's configuration, auto properties and many other APIs are not typed.
+# The add-on also relies on private NVDA symbols, as NVDA offers no extension points for its features.
+reportArgumentType = false
+reportImplicitOverride = false
+reportIncompatibleMethodOverride = false
+reportIndexIssue = false
+reportMissingParameterType = false
+reportOptionalCall = false
+reportOptionalMemberAccess = false
+reportPrivateUsage = false
+reportUninitializedInstanceVariable = false
+reportUnknownArgumentType = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false
+reportUnknownVariableType = false
+reportUnusedCallResult = false
+reportUnusedImport = false
