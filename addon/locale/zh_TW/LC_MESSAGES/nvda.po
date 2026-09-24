@@ -1,0 +1,146 @@
+# Traditional Chinese translation of the CJK Braille Enhancements add-on for NVDA.
+# Copyright (C) 2026 Keyang556
+# This file is distributed under the same license as the 'cjkBrailleEnhancements' package.
+# Keyang556, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 'cjkBrailleEnhancements' '1.0.0'\n"
+"Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
+"POT-Creation-Date: 2026-09-24 14:20+0800\n"
+"PO-Revision-Date: 2026-09-24 14:30+0800\n"
+"Last-Translator: Keyang556\n"
+"Language-Team: Chinese (Traditional)\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Translators: A choice for the CJK text wrap setting.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:39
+msgid "Same as NVDA text wrap"
+msgstr "與 NVDA 文字換行相同"
+
+#. Translators: A choice for the CJK text wrap setting.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:41
+msgid "Off (fill the display, split characters)"
+msgstr "關閉 (填滿點字顯示器，會拆開字元)"
+
+#. Translators: A choice for the CJK text wrap setting.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:43
+msgid "At character boundaries"
+msgstr "在字元邊界"
+
+#. Translators: A choice for the CJK text wrap setting.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:45
+msgid "Repeat split character on next window (GMouse style)"
+msgstr "於下一個視窗重複被拆開的字元 (GMouse 模式)"
+
+#. Translators: An item in the list of boundaries where spaces are inserted in Chinese braille.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:61
+msgid "Between Chinese characters and Latin letters"
+msgstr "中文字與拉丁字母之間"
+
+#. Translators: An item in the list of boundaries where spaces are inserted in Chinese braille.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:63
+msgid "Between Chinese characters and numbers"
+msgstr "中文字與數字之間"
+
+#. Translators: An item in the list of boundaries where spaces are inserted in Chinese braille.
+#: addon\globalPlugins\cjkBrailleEnhancements\addonConfig.py:65
+msgid "Between Latin letters and numbers"
+msgstr "拉丁字母與數字之間"
+
+#. Translators: The title of the settings panel of the CJK Braille Enhancements add-on.
+#: addon\globalPlugins\cjkBrailleEnhancements\settingsPanel.py:23
+msgid "CJK Braille"
+msgstr "中日韓點字"
+
+#. Translators: The label for a setting in the CJK Braille settings panel
+#. to choose how continuous CJK text (e.g. Chinese) wraps on the braille display.
+#: addon\globalPlugins\cjkBrailleEnhancements\settingsPanel.py:32
+msgid "&Text wrap for CJK characters:"
+msgstr "中日韓字元的文字換行(&T):"
+
+#. Translators: The label for a checkbox in the CJK Braille settings panel.
+#: addon\globalPlugins\cjkBrailleEnhancements\settingsPanel.py:42
+msgid "&Insert spaces between Chinese characters, Latin letters and numbers"
+msgstr "在中文字、拉丁字母與數字之間插入空格(&I)"
+
+#. Translators: The label for a list of checkboxes in the CJK Braille settings panel
+#. to choose where spaces are inserted.
+#: addon\globalPlugins\cjkBrailleEnhancements\settingsPanel.py:52
+msgid "Insert spaces &at:"
+msgstr "插入空格的位置(&A):"
+
+#. Translators: Input help mode message for the command to cycle through CJK text wrap modes.
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:54
+msgid "Cycle through the braille text wrap modes for CJK characters"
+msgstr "循環切換中日韓字元的點字文字換行模式"
+
+#. Translators: Reported when CJK text wrap can't be used with this version of NVDA.
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:60
+msgid "CJK text wrap is unavailable"
+msgstr "無法使用中日韓文字換行"
+
+#. Translators: Reports the CJK text wrap mode, e.g. "CJK text wrap At character boundaries".
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:67
+#, python-brace-format
+msgid "CJK text wrap {mode}"
+msgstr "中日韓文字換行 {mode}"
+
+#. Translators: Input help mode message for the command to toggle spacing in Chinese braille.
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:72
+msgid ""
+"Toggles inserting spaces between Chinese characters, Latin letters and "
+"numbers in braille"
+msgstr "切換是否在點字中於中文字、拉丁字母與數字之間插入空格"
+
+#. Translators: Reported when inserting spaces between Chinese characters, Latin letters and numbers is turned on.
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:82
+msgid "Chinese braille spacing on"
+msgstr "中文點字插入空格 開啟"
+
+#. Translators: Reported when inserting spaces between Chinese characters, Latin letters and numbers is turned off.
+#: addon\globalPlugins\cjkBrailleEnhancements\__init__.py:85
+msgid "Chinese braille spacing off"
+msgstr "中文點字插入空格 關閉"
+
+#. Add-on summary/title, usually the user visible name of the add-on
+#. Translators: Summary/title for this add-on
+#. to be shown on installation and add-on information found in add-on store
+#: buildVars.py:25
+msgid "CJK Braille Enhancements"
+msgstr "中日韓點字增強"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-on store
+#: buildVars.py:28
+msgid ""
+"Braille enhancements for continuous CJK text such as Chinese:\n"
+"text wrap at CJK character boundaries or with GMouse style overlapping "
+"panning,\n"
+"and optional spaces between Chinese characters, Latin letters and numbers."
+msgstr ""
+"針對中文等連續書寫文字的點字增強功能：\n"
+"在中日韓字元邊界換行，或使用 GMouse 模式的重疊捲動，\n"
+"以及可選擇在中文字、拉丁字母與數字之間插入空格。"
+
+#. Brief changelog for this version
+#. Translators: what's new content for the add-on version to be shown in the add-on store
+#: buildVars.py:35
+msgid ""
+"Initial release.\n"
+"\n"
+"* Text wrap for CJK characters: off, at character boundaries, or repeating "
+"split characters (GMouse style) (NVDA issue #18295).\n"
+"* Optional spaces between Chinese characters, Latin letters and numbers in "
+"Chinese braille (NVDA issue #20726)."
+msgstr ""
+"首次發布。\n"
+"\n"
+"* 中日韓字元的文字換行：關閉、在字元邊界換行，或重複被拆開的字元 (GMouse 模"
+"式) (NVDA issue #18295)。\n"
+"* 可選擇在中文點字中於中文字、拉丁字母與數字之間插入空格 (NVDA issue "
+"#20726)。"

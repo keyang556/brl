@@ -3,9 +3,9 @@ requires = ["setuptools~=80.9", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "addonTemplate"
+name = "cjkBrailleEnhancements"
 dynamic = ["version"]
-description = "NVDA add-on template"
+description = "CJK Braille Enhancements add-on for NVDA"
 maintainers = [
 	{name = "NV Access", email = "info@nvaccess.org"},
 ]
@@ -55,6 +55,11 @@ dev = [
 	{ include-group = "l10n" },
 	{ include-group = "lint" },
 ]
+
+[tool.setuptools]
+# The add-on is not installed as a Python package,
+# so don't let setuptools discover top-level directories such as addonTests as packages.
+packages = []
 
 [tool.ruff]
 line-length = 110
